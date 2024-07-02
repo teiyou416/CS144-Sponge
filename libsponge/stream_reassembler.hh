@@ -3,9 +3,11 @@
 
 #include <iostream>
 #include "byte_stream.hh"
-#include <unordered_set>
 #include <cstdint>
 #include <string>
+#include <vector>
+#include <algorithm>
+
 
 using namespace std;
 //! \brief A class that assembles a series of excerpts from a byte stream (possibly out of order,
@@ -16,9 +18,14 @@ class StreamReassembler {
 
     ByteStream _output;  //!< The reassembled in-order byte stream
     size_t _capacity;    //!< The maximum number of bytes
+    size_t _cur_index;
+    size_t _eof_index;
+    size_t unassembled_bytes_cnt;
+    vector<pair<char,bool>>_stream;
         //! \brief Construct a `StreamReassembler` that will store up to `capacity` bytes.
     //! \note This capacity limits both the bytes that have been reassembled,
     //! and those that have not yet been reassembled.
+public:
     StreamReassembler(const size_t capacity);
 
     //! \brief Receive a substring and write any newly contiguous bytes into the stream.
