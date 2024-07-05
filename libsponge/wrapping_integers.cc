@@ -15,7 +15,6 @@ using namespace std;
 //! \param isn The initial sequence number
 WrappingInt32 wrap(uint64_t n, WrappingInt32 isn) {
       return operator+(isn,n);    
-   // return WrappingInt32{static_cast<uint32_t>(n)+isn.raw_value()};
 }
 
 //! Transform a WrappingInt32 into an "absolute" 64-bit sequence number (zero-indexed)
@@ -36,5 +35,5 @@ uint64_t unwrap(WrappingInt32 n, WrappingInt32 isn, uint64_t checkpoint) {
     if (max(res1, checkpoint) - min(res1, checkpoint) < max(res2, checkpoint) - min(res2, checkpoint)) 
         return res1;
     return res2;
-}
+   }
     
